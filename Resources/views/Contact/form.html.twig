@@ -1,0 +1,10 @@
+{% if app.session.hasFlash('contact_thanks')  %}
+    <p>{{ app.session.getFlash('contact_thanks') }}</p>
+{% else %}
+    <form action="{{path("savvy_submit_contact")}}" method="post">
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Send Message</button>
+        </p>
+    </form>
+{% endif %}

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>New contact</title>
+    </head>
+    <body>
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <p>New contact received, details below dude:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li><strong>Name</strong>:{{ contact.title | title }} {{ contact.name }}</li>
+                        <li><strong>Company</strong>:{{ contact.company }}</li>
+                        <li><strong>Telephone</strong>:{{ contact.telephone }}</li>
+                        <li><strong>Email</strong>: {{ contact.email }}</li>
+                        <li><strong>Message</strong>: {{ contact.message }}</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

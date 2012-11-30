@@ -1,0 +1,25 @@
+{
+    "name": "savvy/contactBundle",
+    "type": "symfony-bundle",
+    "description": "Extra awesome contact bundle for Symfony2",
+    "keywords": ["contact", "bundle"],
+    "homepage": "http://github.com/oxygenthinking/SavvyContactBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luke Rotherfield",
+            "email": "luke@savvycreativeuk.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": ">=2.1,<=2.2-dev"
+    },
+    "autoload": {
+        "psr-0": { "Savvy\\ContactBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Savvy/ContactBundle"
+}

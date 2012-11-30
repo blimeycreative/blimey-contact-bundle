@@ -1,0 +1,70 @@
+This part of the tutorial will cover publishing our contact bundle with composer and packagist.  We will also cover installing our bundle via composer in a different Symfony2 project.  If you have missed out on any of the previous tutorials, you can find them here:
+Part 1: <a href="http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/">http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/</a>
+Part 2: <a href="http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/">http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/</a>
+Part 3: <a href="http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-3/">http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-3/</a>
+
+<h3>Composer configuration</h3>
+In order for our bundle to be downloaded with composer, we need to create a composer.json file in the root of our bundle.  This will allow us to tell composer details about our bundle including its name, who wrote it and any dependencies it has (like the Symfony2 framework!):
+[json]
+{
+    "name": "savvy/contactBundle",
+    "type": "symfony-bundle",
+    "description": "Extra awesome contact bundle for Symfony2",
+    "keywords": ["contact", "bundle"],
+    "homepage": "http://github.com/oxygenthinking/SavvyContactBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luke Rotherfield",
+            "email": "luke@savvycreativeuk.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": ">=2.1,<=2.2-dev"
+    },
+    "autoload": {
+        "psr-0": { "Savvy\\ContactBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Savvy/ContactBundle"
+}
+[/json]
+<h3>Git and GitHub</h3>
+<a href="http://git-scm.com/">Git</a> and <a href="http://github.com">GitHub</a> are an extremely important part of <a href="http://savvycreativeuk.com">our</a> development process. Version control is not only a really helpful development and collaboration tool, it is also vital for large projects. For a more in depth read on version control check this article out: <a href="http://www.oss-watch.ac.uk/resources/versioncontrol">http://www.oss-watch.ac.uk/resources/versioncontrol</a>.
+Now that we have covered the importance of version control we can set up a git repository and a remote repository on github.  These will allow us to publish the package easily in a bit using <a href="https://packagist.org/">Packagist</a>.
+To set up a Git repository;
+ <ol>
+     <li>
+        <a href="http://git-scm.com/downloads">download Git</a> for your operating system.  If you are using windows you will need <a href="http://code.google.com/p/msysgit/downloads/list?q=full+installer+official+git">msysgit</a> instead.
+     </li>
+     <li>
+        Initialise a Git repository on the command line:
+        [shell]
+            cd /path/to/your/symfony/src/Savvy/ContactBundle
+            git init
+        [/shell]
+     </li>
+     <li>
+        Create a .gitignore file in your ContactBundle root, we will cover unit tests later but for now we will ignore the folder:
+        [plain]
+            #.gitignore
+            Tests/*
+        [/plain]
+     </li>
+ </ol>
+We can now add our files to our Git repository and commit them so that they start getting tracked:
+[shell]
+git add .
+git commit -m "Initial commit of the awesome Contact Bundle"
+[/shell]
+
+With our files now being tracked we can setup a GitHub remote repository and push the SavvyContactBundle to it.  You will need to sign up for a GitHub account if you do not already have one: <a href="https://github.com/signup/free">https://github.com/signup/free</a>.
+
+Once you have signed into GitHub you can create a new repository: https://github.com/new.   We will call our new repository "SavvyContactBundle" and leave it checked as Public.  Click "Create repository" and you should be given a set of commands to push the repository (substitute your company name):
+[shell]
+git remote add origin https://github.com/yourCompanyName/SavvyContactBundle.git
+git push -u origin master
+[/shell]
