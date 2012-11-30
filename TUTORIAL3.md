@@ -1,25 +1,26 @@
-This part of the tutorial will cover sending confirmation and notification emails with <a href="http://swiftmailer.org/">swiftmailer</a> and creating a simple <a href="http://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> for our contact entity.    If you have missed out on part 1 or part 2 of this tutorial, you can find them here:
-Part 1: <a href="http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/">http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/</a>
-Part 2: <a href="http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/">http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/</a>
+# Symfony2: Writing a contact bundle (Part 3)
+This part of the tutorial will cover sending confirmation and notification emails with [swiftmailer][3] and creating a simple [CRUD][4] for our contact entity.    If you have missed out on part 1 or part 2 of this tutorial, you can find them here:
+Part 1: [http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/][1]
+Part 2: [http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/][2]
 
-<h3>Sending confirmation emails with swiftmailer</h3>
-Symfony2 has a <a href="http://swiftmailer.org/">swiftmailer</a> bundle as a default dependency for the framework.  This is good news for us as working with swiftmailer is a lot easier than messing around with the <a href="http://php.net/manual/en/function.mail.php">php mail</a> function because it manages email headers and the like for us.  Swiftmailer is also extremely helpful when we want to <a href="http://swiftmailer.org/docs/messages.html#attaching-files">add an attachment</a> to our email. Adding an attachment with the mail function is not such a simple process.
+## Sending confirmation emails with swiftmailer
+Symfony2 has a [swiftmailer][3] bundle as a default dependency for the framework.  This is good news for us as working with swiftmailer is a lot easier than messing around with the [php mail][5] function because it manages email headers and the like for us.  Swiftmailer is also extremely helpful when we want to [add an attachment][6] to our email. Adding an attachment with the mail function is not such a simple process.
 
 If you have an SMTP server you can use SMTP as your transport method but for this tutorial we will simply use the standard mail method.  This is configured in the app/config/parameters.yml:
 
-[plain]
+```
 #app/config/parameters.yml
 #...
     mailer_transport:  mail
     mailer_host:       localhost
     mailer_user:       ~
     mailer_password:   ~
-[/plain]
+```
 
-The full configuration is documented here: <a href="http://symfony.com/doc/current/reference/configuration/swiftmailer.html#full-default-configuration">http://symfony.com/doc/current/reference/configuration/swiftmailer.html#full-default-configuration</a>
+The full configuration is documented here: [http://symfony.com/doc/current/reference/configuration/swiftmailer.html#full-default-configuration][7]
 	
 Now that the mail transport is configured we can send a couple of emails from our ContactController, one to the "contacter" and one to us to notify us of the contact.  We have already looked at translations so lets also use them to make the email subjects configureable.  We wont make the body copy a translation because we have another plan for that later on in this tutorial:
-[php]
+``` php
 	//Controller/ContactController.php
 	//...
 	public function submitAction()
@@ -62,18 +63,18 @@ Now that the mail transport is configured we can send a couple of emails from ou
             return $this->redirect($this->generateUrl("savvy_contact"));
         }
         //...
-[/php]
+```
 Update the Resources/translations/messages.en.yml with some subjects:
-[plain]
+```
 #messages.en.yml
 #...
 'ContactNotificationSubject': New contact submitted dude!
 'ContactConfirmationSubject': Thanks for contacting Savvy
-[/plain]
+```
 
-<h3>Parameters and email templates</h3>
+## Parameters and email templates
 To continue along the lines of being configurable, we want our contact bundle email addresses and templates to be overwritten if needed in app/config/config.yml.  We will create default parameters in our bundle's Resources/config/services.yml that can then be overwritten in the global config file:
-[plain]
+```
 #Resources/config/services.yml
 parameters:
     #Set up the email address defaults
@@ -82,10 +83,10 @@ parameters:
     #Set up the email template defaults
     contact.notification_template:      SavvyContactBundle:Email:notification.html.twig
     contact.confirmation_template:      SavvyContactBundle:Email:confirmation.html.twig
-[/plain]
+```
 
 It is likely that your bundle is set up to read Resources/config/services.xml rather than .yml so we need to update DependencyInjection/SavvyContactExtension.php to read .yml instead:
-[php]
+``` php
 //DependencyInjection/SavvyContactExtension.php
 //...
     public function load(array $configs, ContainerBuilder $container)
@@ -98,10 +99,10 @@ It is likely that your bundle is set up to read Resources/config/services.xml ra
         //Load Resources/config/services.yml
         $loader->load('services.yml');
     }
-[/php]
+```
 
 Now that we have defined the email templates, lets create the actual files in Resources/views/Email:
-[html]
+``` html
 <!-- Resources/views/Email/confirmation.html.twig -->
 <!DOCTYPE HTML>
 <html lang="en-US">
@@ -132,8 +133,8 @@ Now that we have defined the email templates, lets create the actual files in Re
         </table>
     </body>
 </html>
-[/html]
-[html]
+```
+``` html
 <!-- Resources/views/Email/confirmation.html.twig -->
 <!DOCTYPE HTML>
 <html lang="en-US">
@@ -168,9 +169,9 @@ Now that we have defined the email templates, lets create the actual files in Re
         </table>
     </body>
 </html>
-[/html]
+```
 And finally we can set the swiftmailer calls in Controller/ContactController.php to use our new templates and addresses:
-[php]
+``` php
 	//Controller/ContactController.php
 	//...
     //Send us a notification email
@@ -205,41 +206,33 @@ And finally we can set the swiftmailer calls in Controller/ContactController.php
     //Actually send the messages
     $this->get('mailer')->send($notification);
     $this->get('mailer')->send($confirmation);
-[/php]
+```
 
 Now just clear the dev cache and submit a contact to see the email templates and addresses get used. Awesome!
-<h3>Contact CRUD</h3>
+## Contact CRUD
 Finally we want to create a system to manage the contact submissions.  We call this a CRUD which stands for Create, Read, Update and Delete. Symfony2 command line tool has helped us a lot already, however its not done yet.  The tool has a CRUD generator that can create a full CRUD from an entity.  For the contact system we don't actually need a full CRUD, more just an "R" but we will create it anyway just for the added functionality in case its desired. If you just want an "R" the CRUD generation tool helpfully gives us an option to leave out the write actions "CUD".
 
 Before we can generate the CRUD we need to make a few tweaks to our files as the CRUD generator is slightly limited in its file creation abilities:
-<ul>
-    <li>
-        We need to temporarily rename our ContactController.php file to _ContactController.php as the CRUD generator is going to create a ContactController.php file.
-    </li>
-    <li>
-        For the same reason we need to rename our Resources/views/Contact/index.html.twig to Resources/views/Contact/form.html.twig.
-    </li>
-    <li>
-        The final tweak is to change both occurrences of our @Template annotation in ContactController.php to:
-    </li>
-</ul>
-[plain]  @Template("SavvyContactBundle:Contact:form.html.twig")[/plain]
+
+* We need to temporarily rename our ContactController.php file to _ContactController.php as the CRUD generator is going to create a ContactController.php file.
+* For the same reason we need to rename our Resources/views/Contact/index.html.twig to Resources/views/Contact/form.html.twig.
+* The final tweak is to change both occurrences of our @Template annotation in ContactController.php to: `@Template("SavvyContactBundle:Contact:form.html.twig")`
 
 Now that we have made these small tweaks we can use our Contact entity short name to generate a CRUD:
-[shell]
+``` shell
 php app/console doctrine:generate:crud
 The Entity shortcut name: SavvyContactBundle:Contact
 Do you want to generate the "write" actions [no]? yes
 Configuration format (yml, xml, php, or annotation) [annotation]:
 Routes prefix [/contact]: /admin/contact
 Do you confirm generation [yes]?
-[/shell]
+```
 Now we can just rename the newly generated ContactController.php to AdminContactController.php and the class name to:
-[php]
+``` php
 //Controller/AdminContactController.php
 //...
 class AdminContactController extends Controller
-[/php]
+```
 Create a new folder "Resources/views/AdminContact" and drag the index.html.twig , new.html.twig, edit.html.twig and show.html.twig files from the Contact folder into the new AdminContact folder.
 
 We are now ready to test our admin system by visiting your.domain.com/app_dev.php/admin/contact. You should see a table of all the test contacts we have made.  Fom this table you can add, edit, view and delete contact submissions, how easy was that!!
@@ -249,3 +242,11 @@ In the next tutorial we will look at setting our bundle up so it can be installe
 Thanks for reading, peace out
 
 Luke
+
+[1]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/
+[2]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/
+[3]: http://swiftmailer.org/
+[4]: http://en.wikipedia.org/wiki/Create,_read,_update_and_delete
+[5]: http://php.net/manual/en/function.mail.php
+[6]: http://swiftmailer.org/docs/messages.html#attaching-files
+[7]: http://symfony.com/doc/current/reference/configuration/swiftmailer.html#full-default-configuration

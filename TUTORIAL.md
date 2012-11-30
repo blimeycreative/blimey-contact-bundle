@@ -51,14 +51,14 @@ class AppKernel extends Kernel
 			//...
 			new Savvy\ContactBundle\SavvyContactBundle(),
 ```
-[plain]
+``` yaml
 #app/config/routing.yml
 #...
 savvy_contact:
     resource: "@SavvyContactBundle/Controller/"
     type:     annotation
     prefix:   /
-[/plain]
+```
 
 ## Hello world
 Now we have the bundle we want to rename the DefaultController.php file to ContactController.php.  Open up ContactController.php and rename the class to ContactController.  Update the annotated route to /contact, give it a name "savvy_contact" and remove all occurrences of $name (we always prepend "savvy_" to a route name so that it is unlikely to overwrite or be overwritten by another bundle):

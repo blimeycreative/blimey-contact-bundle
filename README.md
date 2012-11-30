@@ -18,7 +18,18 @@ The tutorial is reasonably basic as is the contact form but it does work through
 * Translations
 * Simple twig templating
 
+You can also read the tutorials as part of this bundle:
+* [Repo version part 1][5]
+* [Repo version part 2][6]
+* [Repo version part 3][7]
+* [Repo version part 4][8]
+
+
 [1]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/
 [2]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/
 [3]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-3/
 [4]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-4/
+[5]: http://github.com/oxygenthinking/savvy-contact-bundle/blob/master/TUTORIAL.md
+[6]: http://github.com/oxygenthinking/savvy-contact-bundle/blob/master/TUTORIAL2.md
+[7]: http://github.com/oxygenthinking/savvy-contact-bundle/blob/master/TUTORIAL3.md
+[8]: http://github.com/oxygenthinking/savvy-contact-bundle/blob/master/TUTORIAL4.md
