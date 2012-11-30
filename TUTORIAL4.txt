@@ -65,6 +65,6 @@ With our files now being tracked we can setup a GitHub remote repository and pus
 
 Once you have signed into GitHub you can create a new repository: https://github.com/new.   We will call our new repository "SavvyContactBundle" and leave it checked as Public.  Click "Create repository" and you should be given a set of commands to push the repository (substitute your company name):
 [shell]
-git remote add origin https://github.com/yourCompanyName/SavvyContactBundle.git
+git remote add origin git@github.com/yourCompanyName/SavvyContactBundle.git
 git push -u origin master
 [/shell]
