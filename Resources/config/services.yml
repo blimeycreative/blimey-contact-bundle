@@ -1,6 +1,6 @@
 parameters:
     #Set up the email address defaults
-    contact.notification_addresses:     luke@savvycreativeuk.com, l.rotherfield@gmail.com
+    contact.notification_addresses:     luke@savvycreativeuk.com
     contact.confirmation_from_address:  hello@savvycreativeuk.com
     #Set up the email template defaults
     contact.notification_template:      SavvyContactBundle:Email:notification.html.twig
