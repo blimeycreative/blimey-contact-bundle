@@ -12,6 +12,8 @@ Feel free to check out the tutorial and follow along here:
 
 The tutorial is reasonably basic as is the contact form but it does work through many Symfony2 features including:
 * The command line tool for bundles, entities, forms and CRUD's
+* Working with entity and form classes
+* Annotations
 * Services.yml and simple parameter setup
 * Translations
 * Simple twig templating
