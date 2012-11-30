@@ -1,7 +1,7 @@
 Savvy Contact Bundle
 ====
 
-This bundle has been created as the source code for the "Writing a Symfony2 Contact bundle" tutorials by Savvy Tech.
+This bundle has been created as the source code for the ["Writing a Symfony2 Contact bundle" tutorials][1] by Savvy Tech.
 
 Feel free to check out the tutorial and follow along here:
 
