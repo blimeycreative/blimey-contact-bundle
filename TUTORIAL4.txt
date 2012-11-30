@@ -7,7 +7,7 @@ Part 3: <a href="http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle
 In order for our bundle to be downloaded with composer, we need to create a composer.json file in the root of our bundle.  This will allow us to tell composer details about our bundle including its name, who wrote it and any dependencies it has (like the Symfony2 framework!):
 [json]
 {
-    "name": "savvy/contactBundle",
+    "name": "savvy/contact-bundle",
     "type": "symfony-bundle",
     "description": "Extra awesome contact bundle for Symfony2",
     "keywords": ["contact", "bundle"],
@@ -32,6 +32,7 @@ In order for our bundle to be downloaded with composer, we need to create a comp
     "target-dir": "Savvy/ContactBundle"
 }
 [/json]
+The "name" value must be lowercase to work with packagist later on in the tutorial.
 <h3>Git and GitHub</h3>
 <a href="http://git-scm.com/">Git</a> and <a href="http://github.com">GitHub</a> are an extremely important part of <a href="http://savvycreativeuk.com">our</a> development process. Version control is not only a really helpful development and collaboration tool, it is also vital for large projects. For a more in depth read on version control check this article out: <a href="http://www.oss-watch.ac.uk/resources/versioncontrol">http://www.oss-watch.ac.uk/resources/versioncontrol</a>.
 Now that we have covered the importance of version control we can set up a git repository and a remote repository on github.  These will allow us to publish the package easily in a bit using <a href="https://packagist.org/">Packagist</a>.
@@ -63,8 +64,14 @@ git commit -m "Initial commit of the awesome Contact Bundle"
 
 With our files now being tracked we can setup a GitHub remote repository and push the SavvyContactBundle to it.  You will need to sign up for a GitHub account if you do not already have one: <a href="https://github.com/signup/free">https://github.com/signup/free</a>.
 
-Once you have signed into GitHub you can create a new repository: https://github.com/new.   We will call our new repository "SavvyContactBundle" and leave it checked as Public.  Click "Create repository" and you should be given a set of commands to push the repository (substitute your company name):
+Once you have signed into GitHub you can create a new repository: https://github.com/new.   We will call our new repository "savvy-contact-bundle" and leave it checked as Public (if you use your own name, make sure it is all lowercase).  Click "Create repository" and you should be given a set of commands to push the repository (substitute your company name):
 [shell]
-git remote add origin git@github.com/yourCompanyName/SavvyContactBundle.git
+git remote add origin git@github.com:yourCompanyName/savvy-contact-bundle.git
 git push -u origin master
 [/shell]
+After you have run these commands you should see the files get pushed to the GitHub repository.  Check the repository online to see if it has been updated.
+
+<h3>Packagist</h3>
+"<a href="https://packagist.org/">Packagist</a> is the main <a href="http://getcomposer.org/">Composer</a> repository. It aggregates all sorts of PHP packages that are installable with Composer". Sign up for an account and then we can submit the ContactBundle so that it can be installed with Composer.
+
+To submit our ContactBundle visit: <a href="https://packagist.org/packages/submit">https://packagist.org/packages/submit</a> and paste your repository url into the form.  Hopefully if all goes well
