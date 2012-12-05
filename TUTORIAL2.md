@@ -1,5 +1,5 @@
 # Symfony2: Writing a contact bundle (part 2)
-This part of the tutorial will cover configuring forms and entities and, submitting and saving data.  If you have missed out on part one of this tutorial you can find it here: [http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/][1]
+This part of the tutorial will cover configuring forms and entities and, submitting and saving data.  If you have missed out on part one of this tutorial you can find it here: [http://blog.savvycreativeuk.com/2012/11/symfony2-writing-a-contact-bundle-part-1/][1]
 
 ## Show the form
 Full documentation on Symfony forms is available here: [http://symfony.com/doc/current/book/forms.html][2]
@@ -274,7 +274,7 @@ Thanks for reading, peace out
 
 Luke
 
-[1]:   http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/
+[1]:   http://blog.savvycreativeuk.com/2012/11/symfony2-writing-a-contact-bundle-part-1/
 [2]:   http://symfony.com/doc/current/book/forms.html
 [3]:   http://stackoverflow.com/questions/5713405/how-do-you-style-the-html5-form-validation-messages/5965505#5965505
 [4]:   http://symfony.com/doc/2.0/book/templating.html#linking-to-pages

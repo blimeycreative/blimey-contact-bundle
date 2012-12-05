@@ -25,7 +25,7 @@ You can also read the tutorials as part of this bundle:
 * [Repo version part 4][8]
 
 
-[1]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/
+[1]: http://blog.savvycreativeuk.com/2012/11/symfony2-writing-a-contact-bundle-part-1/
 [2]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/
 [3]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-3/
 [4]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-4/

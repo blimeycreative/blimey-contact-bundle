@@ -1,6 +1,6 @@
 # Symfony2: Writing a contact bundle (Part 3)
 This part of the tutorial will cover sending confirmation and notification emails with [swiftmailer][3] and creating a simple [CRUD][4] for our contact entity.    If you have missed out on part 1 or part 2 of this tutorial, you can find them here:
-Part 1: [http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/][1]
+Part 1: [http://blog.savvycreativeuk.com/2012/11/symfony2-writing-a-contact-bundle-part-1/][1]
 Part 2: [http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/][2]
 
 ## Sending confirmation emails with swiftmailer
@@ -243,7 +243,7 @@ Thanks for reading, peace out
 
 Luke
 
-[1]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-1/
+[1]: http://blog.savvycreativeuk.com/2012/11/symfony2-writing-a-contact-bundle-part-1/
 [2]: http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/
 [3]: http://swiftmailer.org/
 [4]: http://en.wikipedia.org/wiki/Create,_read,_update_and_delete
