@@ -1,11 +1,11 @@
 # Symfony2: Writing a contact bundle (Part 4)
 This part of the tutorial will cover publishing our contact bundle with composer and packagist.  We will also cover installing our bundle via composer in a different Symfony2 project.  If you have missed out on any of the previous tutorials, you can find them here:
 
-Part 1: [http://blog.savvycreativeuk.com/2012/11/symfony2-writing-a-contact-bundle-part-1/][1]
+Part 1: [http://blog.savvycreativeuk.com/2012/12/symfony2-writing-a-contact-bundle-part-1/][1]
 
-Part 2: [http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/][2]
+Part 2: [http://blog.savvycreativeuk.com/2012/12/symfony2-contact-bundle-part-2/][2]
 
-Part 3: [http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-3/][3]
+Part 3: [http://blog.savvycreativeuk.com/2012/12/symfony2-contact-bundle-part-3/][3]
 
 ## Composer configuration
 In order for our bundle to be downloaded with composer, we need to create a composer.json file in the root of our bundle.  This will allow us to tell composer details about our bundle including its name, who wrote it and any dependencies it has (like the Symfony2 framework!):
@@ -83,7 +83,7 @@ Follow the GitHub Service Hook walkthrough here: [https://packagist.org/profile/
 That's it, our Contact Bundle is now available for install via Composer!
 
 ## Installing the ContactBundle in a new Symfony2 project
-So the ContactBundle is ready for installation, great news but how do we install it.  The installation process is actually very simple.  Set up a new Symfony2 project with Composer, if you don't remember how just check out the first tutorial: [http://blog.savvycreativeuk.com/2012/11/symfony2-writing-a-contact-bundle-part-1/][1].
+So the ContactBundle is ready for installation, great news but how do we install it.  The installation process is actually very simple.  Set up a new Symfony2 project with Composer, if you don't remember how just check out the first tutorial: [http://blog.savvycreativeuk.com/2012/12/symfony2-writing-a-contact-bundle-part-1/][1].
 
 Once the new project is set up, open the composer.json file and add the savvy/contact-bundle as a dependency:
 ``` js
@@ -137,9 +137,9 @@ Thanks for reading, peace out
 
 Luke
 
-[1]:  http://blog.savvycreativeuk.com/2012/11/symfony2-writing-a-contact-bundle-part-1/
-[2]:  http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-2/
-[3]:  http://blog.savvycreativeuk.com/2012/11/symfony2-contact-bundle-part-3/
+[1]:  http://blog.savvycreativeuk.com/2012/12/symfony2-writing-a-contact-bundle-part-1/
+[2]:  http://blog.savvycreativeuk.com/2012/12/symfony2-contact-bundle-part-2/
+[3]:  http://blog.savvycreativeuk.com/2012/12/symfony2-contact-bundle-part-3/
 [4]:  http://git-scm.com/
 [5]:  http://github.com
 [6]:  http://savvycreativeuk.com
