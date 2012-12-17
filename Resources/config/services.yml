@@ -6,4 +6,4 @@ parameters:
     contact.notification_template:      SavvyContactBundle:Email:notification.html.twig
     contact.confirmation_template:      SavvyContactBundle:Email:confirmation.html.twig
     #Full namespace for contact form to be used
-    contact.formtype.namespace: "\Savvy\ContactBundle\Form\Contact"
+    contact.formtype.namespace: "\Savvy\ContactBundle\Form\ContactType"

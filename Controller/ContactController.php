@@ -18,7 +18,8 @@ class ContactController extends Controller
     public function indexAction()
     {
         //use the createForm method to get a symfony form instance of our form
-        $form = $this->createForm(new $this->get('contact.formtype.namespace'));
+        $formname = $this->container->getParameter('contact.formtype.namespace');
+        $form = $this->createForm(new $formname);
 
         return array(
             //pass the form to our template, must be a form view using ->createView()
@@ -36,7 +37,8 @@ class ContactController extends Controller
     {
         //Create a new contact entity instance
         $contact = new Contact();
-        $form = $this->createForm(new $this->get('contact.formtype.namespace'), $contact);
+        $formname = $this->container->getParameter('contact.formtype.namespace');
+        $form = $this->createForm(new $formname, $contact);
         //Bind the posted data to the form
         $form->bind($this->getRequest());
         //Make sure the form is valid before we persist the contact
