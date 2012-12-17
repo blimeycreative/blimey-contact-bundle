@@ -7,7 +7,6 @@ use Savvy\ContactBundle\Entity\Contact;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Savvy\ContactBundle\Form\ContactType;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContactController extends Controller
@@ -19,7 +18,7 @@ class ContactController extends Controller
     public function indexAction()
     {
         //use the createForm method to get a symfony form instance of our form
-        $form = $this->createForm(new ContactType());
+        $form = $this->createForm(new $this->get('contact.formtype.namespace'));
 
         return array(
             //pass the form to our template, must be a form view using ->createView()
@@ -37,7 +36,7 @@ class ContactController extends Controller
     {
         //Create a new contact entity instance
         $contact = new Contact();
-        $form = $this->createForm(new ContactType(), $contact);
+        $form = $this->createForm(new $this->get('contact.formtype.namespace'), $contact);
         //Bind the posted data to the form
         $form->bind($this->getRequest());
         //Make sure the form is valid before we persist the contact
