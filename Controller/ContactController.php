@@ -18,7 +18,7 @@ class ContactController extends Controller
     public function indexAction()
     {
         //use the createForm method to get a symfony form instance of our form
-        $formname = $this->container->getParameter('contact.formtype.namespace');
+        $formname = $this->getParameter('contact.formtype.namespace');
         $form = $this->createForm(new $formname);
 
         return array(
@@ -37,7 +37,7 @@ class ContactController extends Controller
     {
         //Create a new contact entity instance
         $contact = new Contact();
-        $formname = $this->container->getParameter('contact.formtype.namespace');
+        $formname = $this->getParameter('contact.formtype.namespace');
         $form = $this->createForm(new $formname, $contact);
         //Bind the posted data to the form
         $form->bind($this->getRequest());
@@ -53,10 +53,10 @@ class ContactController extends Controller
 
             //Send us a notification email
             //Get the to addresses and make an array for swiftmailer
-            $addresses = explode(',', $this->container->getParameter('contact.notification_addresses'));
+            $addresses = explode(',', $this->getParameter('contact.notification_addresses'));
             //Render the correct template passing through the contact entity
             $response = $this->render(
-                $this->container->getParameter('contact.notification_template'),
+                $this->getParameter('contact.notification_template'),
                 array('contact' => $contact)
             );
             $subject = $this->get('translator')->trans('ContactNotificationSubject');
@@ -70,13 +70,13 @@ class ContactController extends Controller
             $subject = $this->get('translator')->trans('ContactConfirmationSubject');
             //Render the correct template passing through the contact entity
             $response = $this->render(
-                $this->container->getParameter('contact.confirmation_template'),
+                $this->getParameter('contact.confirmation_template'),
                 array('contact' => $contact)
             );
             $confirmation = \Swift_Message::newInstance()
                 ->setSubject($subject)
             //Set the from address to the correct parameter
-                ->setFrom($this->container->getParameter('contact.confirmation_from_address'))
+                ->setFrom($this->getParameter('contact.confirmation_from_address'))
                 ->setTo($contact->getEmail())
             //Set the content to the template string
                 ->setBody($response->getContent(), 'text/html');
@@ -90,6 +90,14 @@ class ContactController extends Controller
         return array(
             'form' => $form->createView()
         );
+    }
+
+    public function getParameter($parameter)
+    {
+        if($this->get('session')->has($parameter)){
+            return $this->get('session')->get($parameter);
+        }
+        return $this->container->getParameter($parameter);
     }
 
 }
