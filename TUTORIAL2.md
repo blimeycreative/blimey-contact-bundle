@@ -76,7 +76,7 @@ In order to use the @Method annotation we need to add another use statement at t
 ```php
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 ```
-* thanks to Mike in the comments for pointing out this missing note *
+*thanks to Mike in the comments for pointing out this missing note*
 
 We also want to use the index template to render the form so we have specified the template using the @Template annotation.
 
