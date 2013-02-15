@@ -71,12 +71,12 @@ class ContactController extends Controller
 }
 ```
 The @Method annotation below allows us to specify the type of request, setting @Method("POST") means only POST requests can access this function.  You will notice if you try and visit your.domain.com/app_dev.php/contact/submit without submitting a form you will get an error explaining that the GET method is not allowed.
+
 In order to use the @Method annotation we need to add another use statement at the top of our controller:
 
 ```php
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 ```
-*thanks to Mike in the comments for pointing out this missing note*
 
 We also want to use the index template to render the form so we have specified the template using the @Template annotation.
 

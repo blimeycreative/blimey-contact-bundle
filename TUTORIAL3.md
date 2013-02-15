@@ -103,7 +103,7 @@ It is likely that your bundle is set up to read Resources/config/services.xml ra
 
 Now that we have defined the email templates, lets create the actual files in Resources/views/Email:
 ``` html
-<!-- Resources/views/Email/confirmation.html.twig -->
+<!-- Resources/views/Email/notification.html.twig -->
 <!DOCTYPE HTML>
 <html lang="en-US">
     <head>
