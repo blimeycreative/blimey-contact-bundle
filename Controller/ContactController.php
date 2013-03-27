@@ -18,7 +18,7 @@ class ContactController extends Controller
     public function indexAction()
     {
         //use the createForm method to get a symfony form instance of our form
-        $formname = $this->getParameter('contact.formtype.namespace');
+        $formname = $this->getParameter('savvy_contact.formtype.namespace');
         $form = $this->createForm(new $formname);
 
         return array(
@@ -37,52 +37,25 @@ class ContactController extends Controller
     {
         //Create a new contact entity instance
         $contact = new Contact();
-        $formname = $this->getParameter('contact.formtype.namespace');
+        $formname = $this->getParameter('savvy_contact.formtype.namespace');
         $form = $this->createForm(new $formname, $contact);
         //Bind the posted data to the form
         $form->bind($this->getRequest());
         //Make sure the form is valid before we persist the contact
         if ($form->isValid()) {
-            //Get the entity manager and persist the contact
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
-            //Redirect the user and add a thank you message
-            $message = $this->get('translator')->trans('ContactThanksMessage');
+
+            $parameters = $this->container->hasParameter("savvy_contact.contact_thanks_message") ? $this->getParameter(
+                "savvy_contact.contact_thanks_message"
+            ) : array();
+            $message = $this->get('translator')->trans('ContactThanksMessage', $parameters);
             $this->get("session")->setFlash('contact_thanks', $message);
 
-            //Send us a notification email
-            //Get the to addresses and make an array for swiftmailer
-            $addresses = explode(',', $this->getParameter('contact.notification_addresses'));
-            //Render the correct template passing through the contact entity
-            $response = $this->render(
-                $this->getParameter('contact.notification_template'),
-                array('contact' => $contact)
-            );
-            $subject = $this->get('translator')->trans('ContactNotificationSubject');
-            $notification = \Swift_Message::newInstance()
-                ->setSubject($subject)
-                ->setFrom($contact->getEmail())
-                ->setTo($addresses)
-            //Set the content to the template string
-                ->setBody($response->getContent(), 'text/html');
-            //Send the "contacter" a message
-            $subject = $this->get('translator')->trans('ContactConfirmationSubject');
-            //Render the correct template passing through the contact entity
-            $response = $this->render(
-                $this->getParameter('contact.confirmation_template'),
-                array('contact' => $contact)
-            );
-            $confirmation = \Swift_Message::newInstance()
-                ->setSubject($subject)
-            //Set the from address to the correct parameter
-                ->setFrom($this->getParameter('contact.confirmation_from_address'))
-                ->setTo($contact->getEmail())
-            //Set the content to the template string
-                ->setBody($response->getContent(), 'text/html');
-            //Actually send the messages
-            $this->get('mailer')->send($notification);
-            $this->get('mailer')->send($confirmation);
+            $this->sendNotifiactionEmail($contact);
+
+            $this->sendConfirmationEmail($contact);
 
             return $this->redirect($this->generateUrl("savvy_contact"));
         }
@@ -92,12 +65,61 @@ class ContactController extends Controller
         );
     }
 
-    public function getParameter($parameter)
+    private function getParameter($parameter)
     {
-        if($this->get('session')->has($parameter)){
+        if ($this->get('session')->has($parameter)) {
             return $this->get('session')->get($parameter);
         }
+
         return $this->container->getParameter($parameter);
     }
+
+    private function sendNotifiactionEmail(Contact $contact)
+    {
+        $response = $this->render(
+            $this->getParameter('savvy_contact.notification_template'),
+            array('contact' => $contact)
+        );
+        $subject_params = $this->container->hasParameter("savvy_contact.notification_subject") ? $this->getParameter(
+            "savvy_contact.notification_subject"
+        ) : array();
+
+        $subject = $this->get('translator')->trans('ContactNotificationSubject', $subject_params);
+
+        $this->sendMail(
+            $this->getParameter('savvy_contact.notification_addresses'),
+            $contact->getEmail(),
+            $subject,
+            $response->getContent()
+        );
+    }
+
+    private function sendConfirmationEmail(Contact $contact)
+    {
+        $subject_params = $this->container->hasParameter("savvy_contact.confirmation_subject") ? $this->getParameter(
+            "savvy_contact.confirmation_subject"
+        ) : array();
+        $subject = $this->get('translator')->trans('ContactConfirmationSubject', $subject_params);
+        $response = $this->render(
+            $this->getParameter('savvy_contact.confirmation_template'),
+            array('contact' => $contact)
+        );
+
+        $this->sendMail(
+            $contact->getEmail(),
+            $this->getParameter('savvy_contact.confirmation_from_address'),
+            $subject,
+            $response->getContent()
+        );
+    }
+
+    private function sendMail($to, $from, $subject, $message)
+    {
+        $email = \Swift_Message::newInstance($subject, $message, 'text/html')
+            ->setFrom($from)
+            ->setTo($to);
+        $this->get('mailer')->send($email);
+    }
+
 
 }

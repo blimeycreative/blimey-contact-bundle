@@ -1,9 +1,6 @@
 parameters:
-    #Set up the email address defaults
-    contact.notification_addresses:     luke@savvycreativeuk.com
-    contact.confirmation_from_address:  hello@savvycreativeuk.com
     #Set up the email template defaults
-    contact.notification_template:      SavvyContactBundle:Email:notification.html.twig
-    contact.confirmation_template:      SavvyContactBundle:Email:confirmation.html.twig
+    savvy_contact.notification_template:      SavvyContactBundle:Email:notification.html.twig
+    savvy_contact.confirmation_template:      SavvyContactBundle:Email:confirmation.html.twig
     #Full namespace for contact form to be used
-    contact.formtype.namespace: "\Savvy\ContactBundle\Form\ContactType"
+    savvy_contact.formtype.namespace: "\Savvy\ContactBundle\Form\ContactType"

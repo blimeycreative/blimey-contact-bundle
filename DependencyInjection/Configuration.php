@@ -20,6 +20,26 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('savvy_contact');
 
+
+        $rootNode->children()
+            ->arrayNode("notification_addresses")
+                ->requiresAtLeastOneElement()
+                ->prototype('scalar')->end()
+            ->end()
+            ->scalarNode("confirmation_from_address")->isRequired()->end()
+            ->arrayNode("contact_thanks_message")
+                ->prototype('scalar')->end()
+            ->end()
+            ->arrayNode("confirmation_subject")
+                ->prototype('scalar')->end()
+            ->end()
+            ->arrayNode("notification_subject")
+                ->prototype('scalar')->end()
+            ->end()
+        ->end();
+
+
+
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.

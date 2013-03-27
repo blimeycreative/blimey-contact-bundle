@@ -22,6 +22,9 @@ class SavvyContactExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        foreach($config as $name => $value){
+            $container->setParameter("savvy_contact.$name", $value);
+        }
         //Yaml loader not Xml loader
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         //Load Resources/config/services.yml
