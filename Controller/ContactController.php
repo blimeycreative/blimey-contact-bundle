@@ -27,7 +27,6 @@ class ContactController extends Controller
         );
     }
 
-
     /**
      * @Route("/contact/submit", name="savvy_submit_contact")
      * @Method("POST")
@@ -65,7 +64,7 @@ class ContactController extends Controller
         );
     }
 
-    private function getParameter($parameter)
+    protected function getParameter($parameter)
     {
         if ($this->get('session')->has($parameter)) {
             return $this->get('session')->get($parameter);
@@ -74,7 +73,7 @@ class ContactController extends Controller
         return $this->container->getParameter($parameter);
     }
 
-    private function sendNotifiactionEmail(Contact $contact)
+    protected function sendNotifiactionEmail(Contact $contact)
     {
         $response = $this->render(
             $this->getParameter('savvy_contact.notification_template'),
@@ -94,7 +93,7 @@ class ContactController extends Controller
         );
     }
 
-    private function sendConfirmationEmail(Contact $contact)
+    protected function sendConfirmationEmail(Contact $contact)
     {
         $subject_params = $this->container->hasParameter("savvy_contact.confirmation_subject") ? $this->getParameter(
             "savvy_contact.confirmation_subject"
@@ -113,13 +112,11 @@ class ContactController extends Controller
         );
     }
 
-    private function sendMail($to, $from, $subject, $message)
+    protected function sendMail($to, $from, $subject, $message)
     {
         $email = \Swift_Message::newInstance($subject, $message, 'text/html')
             ->setFrom($from)
             ->setTo($to);
         $this->get('mailer')->send($email);
     }
-
-
 }
